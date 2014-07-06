@@ -32,8 +32,8 @@ Dir.chdir('..')
 
 `rm -rf #{template_dir}_bare`
 
-# Now that the new class repo exists, clone it and fix the class name
-# in the README.md
+# Now that the new class repo exists, clone it and
+# tweek a few things.
 
 `git clone #{class_repo}`
 Dir.chdir(class_name)
@@ -41,5 +41,6 @@ Dir.chdir(class_name)
 `sed -i.bak 's/$NAME_OF_CLASS/#{class_name}/g' README.md`
 `rm README.md.bak`
 `git add README.md`
-`git commit -m 'update class name'`
+`git rm CLASS_SETUP.md`
+`git commit -m 'Create repo for $NAME_OF_CLASS'`
 `git push origin master`
