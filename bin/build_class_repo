@@ -17,6 +17,7 @@ if initial_dir.strip.split('/').last == template_dir
 end
 
 # in case the last cleanup failed
+puts "\n==========\nCleaning up debris\n==========\n"
 `rm -rf #{template_dir}_bare`
 
 # Make a bare repo of the template_repo on github and then
@@ -24,18 +25,24 @@ end
 # Note: This assumes that you've created the new class repo on github.
 #       Do not initialize your new repo with a readme.
 
+puts "\n==========\nCreating a bare clone of #{template_dir}\n==========\n"
 `git clone --bare https://github.com/torqueforge/#{template_dir}.git #{template_dir}_bare`
 Dir.chdir("#{template_dir}_bare")
 
+puts "\n==========\nPushing a mirror to #{class_repo}\n==========\n"
 `git push --mirror #{class_repo}`
 Dir.chdir('..')
 
+puts "\n==========\nRemoving bare clone of #{template_dir}\n==========\n"
 `rm -rf #{template_dir}_bare`
 
 # Now that the new class repo exists, clone it and
 # tweek a few things.
 
+puts "\n==========\nCloning #{class_repo}\n==========\n"
 `git clone #{class_repo}`
+
+puts "\n==========\nTweaking #{class_repo}\n==========\n"
 Dir.chdir(class_name)
 
 `sed -i.bak 's/$NAME_OF_CLASS/#{class_name}/g' README.md`
@@ -43,4 +50,6 @@ Dir.chdir(class_name)
 `git add README.md`
 `git rm CLASS_SETUP.md`
 `git commit -m 'Create repo for $NAME_OF_CLASS'`
+
+puts "\n==========\nPusing tweaked #{class_repo}\n==========\n"
 `git push origin master`
