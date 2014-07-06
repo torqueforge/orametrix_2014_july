@@ -49,6 +49,7 @@ Dir.chdir(class_name)
 `rm README.md.bak`
 `git add README.md`
 `git rm CLASS_SETUP.md`
+`git rm -r bin`
 `git commit -m 'Create repo for $NAME_OF_CLASS'`
 
 puts "\n==========\nPusing tweaked #{class_repo}\n==========\n"
