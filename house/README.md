@@ -24,6 +24,19 @@ To run a single test, use the name of the test. For example:
 $ ruby test/house_test.rb --name test_verse_1
 ```
 
+#### Using Guard to run the Test Suite
+
+You can use guard to automatically run the test suite after each change 
+you make. To run guard, use the following:
+
+```plain
+$ cd house
+$ bundle
+$ guard
+```
+
+
+
 ### Lyrics
 
 ```plain
