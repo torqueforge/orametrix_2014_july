@@ -12,7 +12,7 @@ You will need:
 Clone this repository:
 
 ```bash
-$ git glone https://github.com/torqueforge/orametrix_2014_july.git
+$ git clone https://github.com/torqueforge/orametrix_2014_july.git
 ```
 
 Change directories so that you are in the project:
