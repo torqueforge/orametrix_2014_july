@@ -379,7 +379,7 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
   end
 
   def test_all_the_verses
-    skip
+    #skip
     assert_equal bottles.verses(99, 0), bottles.song
   end
 end
