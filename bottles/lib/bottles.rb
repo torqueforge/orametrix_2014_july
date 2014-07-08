@@ -1,31 +1,50 @@
 class Bottles
-  def verse(num)
-    case num
-    when (3..99)
-    "#{num} bottles of beer on the wall, #{num} bottles of beer.
-Take one down and pass it around, #{num-1} bottles of beer on the wall.
-"
-    when 2
-"2 bottles of beer on the wall, 2 bottles of beer.
-Take one down and pass it around, 1 bottle of beer on the wall.
-"
-
-    when 1
-"1 bottle of beer on the wall, 1 bottle of beer.
-Take it down and pass it around, no more bottles of beer on the wall.
-"
-    when 0
-"No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, 99 bottles of beer on the wall.
-"
-    end
+  def song
+    verses(99, 0)
   end
 
   def verses(high, low)
     high.downto(low).collect { |num| verse(num) }.join("\n")
   end
 
-  def song
-    verses(99, 0)
+  def verse(num)
+    "#{amount(num).capitalize} #{container(num)} of beer on the wall, "  +
+    "#{amount(num)} #{container(num)} of beer.\n" +
+    "#{end_phrase(num)} #{amount(num-1)} #{container(num-1)} of beer on the wall.\n"
+  end
+
+  private
+  def container(num)
+    if num == 1
+      "bottle"
+    else
+      "bottles"
+    end
+  end
+
+  def it_or_one(num)
+    if num == 1
+      "it"
+    else
+      "one"
+    end
+  end
+
+  def amount(num)
+    if num == 0
+      "no more"
+    elsif num <  0
+      "99"
+    else
+      num.to_s
+    end
+  end
+
+  def end_phrase(num)
+    if num == 0
+      "Go to the store and buy some more,"
+    else
+      "Take #{it_or_one(num)} down and pass it around,"
+    end
   end
 end
