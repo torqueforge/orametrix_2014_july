@@ -5,7 +5,7 @@ class BottlesTest < Minitest::Test
 
   attr_reader :bottles
   def setup
-    @bottles = ::Bottles.new
+    @bottles = ::DrinkingSong.new
   end
 
   def test_the_first_verse
