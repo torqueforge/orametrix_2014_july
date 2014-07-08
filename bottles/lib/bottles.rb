@@ -1,31 +1,54 @@
 class Bottles
-  def verse(num)
-    case num
-    when (3..99)
-    "#{num} bottles of beer on the wall, #{num} bottles of beer.
-Take one down and pass it around, #{num-1} bottles of beer on the wall.
-"
-    when 2
-"2 bottles of beer on the wall, 2 bottles of beer.
-Take one down and pass it around, 1 bottle of beer on the wall.
-"
-
-    when 1
-"1 bottle of beer on the wall, 1 bottle of beer.
-Take it down and pass it around, no more bottles of beer on the wall.
-"
-    when 0
-"No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, 99 bottles of beer on the wall.
-"
-    end
+  def song
+    verses(99, 0)
   end
 
   def verses(high, low)
     high.downto(low).collect { |num| verse(num) }.join("\n")
   end
 
-  def song
-    verses(99, 0)
+  def verse(num)
+    "#{amount(num).capitalize} #{container(num)} of beer on the wall, #{amount(num)} #{container(num)} of beer.\n" +
+    "#{action(num)}, #{amount(successor(num))} #{container(successor(num))} of beer on the wall.\n"
+  end
+
+  def container(count)
+    if count == 1
+      "bottle"
+    else
+      "bottles"
+    end
+  end
+
+  def pronoun(count)
+    if count == 1
+      "it"
+    else
+      "one"
+    end
+  end
+
+  def amount(count)
+    if count == 0
+      "no more"
+    else
+      count.to_s
+    end
+  end
+
+  def successor(num)
+    if num == 0
+      99
+    else
+      num-1
+    end
+  end
+
+  def action(num)
+    if num == 0
+      "Go to the store and buy some more"
+    else
+      "Take #{pronoun(num)} down and pass it around"
+    end
   end
 end
