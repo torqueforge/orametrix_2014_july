@@ -22,6 +22,8 @@ class Bottles
         VerseChunkZero.new(num)
       when 1
         VerseChunkOne.new(num)
+      when 6
+        VerseChunkSix.new(num)
       else
         VerseChunk.new(num)
     end
@@ -78,5 +80,14 @@ class VerseChunkOne < VerseChunk
   def pronoun
     "it"
   end
+end
 
+class VerseChunkSix < VerseChunk
+   def container
+     "six-pack"
+   end
+
+   def amount
+     "1"
+   end
 end
