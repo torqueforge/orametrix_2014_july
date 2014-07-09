@@ -1,4 +1,4 @@
-class DrinkingSong
+class Bottles
   def song
     verses(99, 0)
   end
@@ -8,62 +8,47 @@ class DrinkingSong
   end
 
   def verse(num)
-    starting_inventory = Inventory.new(num)
-    # TODO: Inventory#successor could return a new instance of Inventory
-    ending_inventory = Inventory.new(starting_inventory.successor)
-
-    "#{starting_inventory.amount} #{starting_inventory.container} of beer on the wall, ".capitalize +
-    "#{starting_inventory.amount} #{starting_inventory.container} of beer.\n" +
-    "#{starting_inventory.action}, " + 
-    "#{ending_inventory.amount} #{ending_inventory.container} of beer on the wall.\n"
+    "#{amount(num).capitalize} #{container(num)} of beer on the wall, #{amount(num)} #{container(num)} of beer.\n" +
+    "#{action(num)}, #{amount(successor(num))} #{container(successor(num))} of beer on the wall.\n"
   end
 
-end
-
-class Inventory
-  attr_reader :number
-
-  def initialize(number)
-    @number = number
-  end
-
-  def container
-    if number == 1
+  def container(count)
+    if count == 1
       "bottle"
     else
       "bottles"
     end
   end
 
-  def pronoun
-    if number == 1
+  def pronoun(count)
+    if count == 1
       "it"
     else
       "one"
     end
   end
 
-  def amount
-    if number == 0
+  def amount(count)
+    if count == 0
       "no more"
     else
-      number.to_s
+      count.to_s
     end
   end
 
-  def successor
-    if number == 0
+  def successor(num)
+    if num == 0
       99
     else
-      number-1
+      num-1
     end
   end
 
-  def action
-    if number == 0
+  def action(num)
+    if num == 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun} down and pass it around"
+      "Take #{pronoun(num)} down and pass it around"
     end
   end
 end
