@@ -1,4 +1,4 @@
-class Bottles
+class DrinkingSong
   def song
     verses(99, 0)
   end
@@ -8,43 +8,59 @@ class Bottles
   end
 
   def verse(num)
-    "#{amount(num).capitalize} #{container(num)} of beer on the wall, "  +
-    "#{amount(num)} #{container(num)} of beer.\n" +
-    "#{end_phrase(num)} #{amount(num-1)} #{container(num-1)} of beer on the wall.\n"
+    chunk = VerseChunkGenerator.new(num)
+    successor_chunk = VerseChunkGenerator.new(chunk.successor)
+    "#{chunk.amount} #{chunk.container} of beer on the wall, ".capitalize +
+    "#{chunk.amount} #{chunk.container} of beer.\n" +
+    "#{chunk.action}, " +
+    "#{successor_chunk.amount} #{successor_chunk.container} of beer on the wall.\n"
   end
 
-  private
-  def container(num)
-    if num == 1
+end
+
+class VerseChunkGenerator
+  attr_reader :count
+  def initialize(count)
+    @count = count
+  end
+
+  def container
+    if count == 1
       "bottle"
     else
       "bottles"
     end
   end
 
-  def it_or_one(num)
-    if num == 1
+  def pronoun
+    if count == 1
       "it"
     else
       "one"
     end
   end
 
-  def amount(num)
-    if num == 0
+  def amount
+    if count == 0
       "no more"
-    elsif num <  0
-      "99"
     else
-      num.to_s
+      count.to_s
     end
   end
 
-  def end_phrase(num)
-    if num == 0
-      "Go to the store and buy some more,"
+  def successor
+    if count == 0
+      99
     else
-      "Take #{it_or_one(num)} down and pass it around,"
+      count-1
+    end
+  end
+
+  def action
+    if count == 0
+      "Go to the store and buy some more"
+    else
+      "Take #{pronoun} down and pass it around"
     end
   end
 end
