@@ -1,4 +1,4 @@
-class Bottles
+class DrinkingSong
   def song
     verses(99, 0)
   end
@@ -8,59 +8,15 @@ class Bottles
   end
 
   def verse(num)
-    chunk = VerseChunk.new(num)
-    successor_chunk = VerseChunk.new(chunk.successor)
-    "#{chunk.amount} #{chunk.container} of beer on the wall, ".capitalize +
-    "#{chunk.amount} #{chunk.container} of beer.\n" +
-    "#{chunk.action}, " +
-    "#{successor_chunk.amount} #{successor_chunk.container} of beer on the wall.\n"
-  end
-
-end
-
-class VerseChunk
-  attr_reader :count
-  def initialize(count)
-    @count = count
-  end
-
-  def container
-    if count == 1
-      "bottle"
+    case num
+    when 0
+      "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
+    when 1
+      "1 bottle of beer on the wall, 1 bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
+    when 2
+      "2 bottles of beer on the wall, 2 bottles of beer.\nTake one down and pass it around, 1 bottle of beer on the wall.\n"
     else
-      "bottles"
-    end
-  end
-
-  def pronoun
-    if count == 1
-      "it"
-    else
-      "one"
-    end
-  end
-
-  def amount
-    if count == 0
-      "no more"
-    else
-      count.to_s
-    end
-  end
-
-  def successor
-    if count == 0
-      99
-    else
-      count-1
-    end
-  end
-
-  def action
-    if count == 0
-      "Go to the store and buy some more"
-    else
-      "Take #{pronoun} down and pass it around"
+      "#{num} bottles of beer on the wall, #{num} bottles of beer.\nTake one down and pass it around, #{num-1} bottles of beer on the wall.\n"
     end
   end
 end
