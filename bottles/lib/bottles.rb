@@ -8,11 +8,23 @@ class Bottles
   end
 
   def verse(num)
-    "#{amount(num).capitalize} #{container(num)} of beer on the wall, #{amount(num)} #{container(num)} of beer.\n" +
-    "#{action(num)}, #{amount(successor(num))} #{container(successor(num))} of beer on the wall.\n"
+    chunk = VerseChunk.new(num)
+    successor_chunk = VerseChunk.new(chunk.successor)
+    "#{chunk.amount} #{chunk.container} of beer on the wall, ".capitalize +
+    "#{chunk.amount} #{chunk.container} of beer.\n" +
+    "#{chunk.action}, " +
+    "#{successor_chunk.amount} #{successor_chunk.container} of beer on the wall.\n"
   end
 
-  def container(count)
+end
+
+class VerseChunk
+  attr_reader :count
+  def initialize(count)
+    @count = count
+  end
+
+  def container
     if count == 1
       "bottle"
     else
@@ -20,7 +32,7 @@ class Bottles
     end
   end
 
-  def pronoun(count)
+  def pronoun
     if count == 1
       "it"
     else
@@ -28,7 +40,7 @@ class Bottles
     end
   end
 
-  def amount(count)
+  def amount
     if count == 0
       "no more"
     else
@@ -36,19 +48,19 @@ class Bottles
     end
   end
 
-  def successor(num)
-    if num == 0
+  def successor
+    if count == 0
       99
     else
-      num-1
+      count-1
     end
   end
 
-  def action(num)
-    if num == 0
+  def action
+    if count == 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun(num)} down and pass it around"
+      "Take #{pronoun} down and pass it around"
     end
   end
 end
