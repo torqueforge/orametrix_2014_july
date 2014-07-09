@@ -8,15 +8,92 @@ class DrinkingSong
   end
 
   def verse(num)
+    chunk = chunk_for(num)
+    chunk_successor = chunk_for(chunk.successor)
+    "#{chunk} of beer on the wall, ".capitalize +
+    "#{chunk} of beer.\n" + 
+    "#{chunk.action}, " + 
+    "#{chunk_successor} of beer on the wall.\n"
+  end
+
+  def chunk_for(num)
     case num
     when 0
-      "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
+      VerseChunkZero.new(num)
     when 1
-      "1 bottle of beer on the wall, 1 bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-    when 2
-      "2 bottles of beer on the wall, 2 bottles of beer.\nTake one down and pass it around, 1 bottle of beer on the wall.\n"
+      VerseChunkOne.new(num)
+    when 6
+      VerseChunkSix.new(num)
     else
-      "#{num} bottles of beer on the wall, #{num} bottles of beer.\nTake one down and pass it around, #{num-1} bottles of beer on the wall.\n"
+      VerseChunk.new(num)
     end
   end
+end
+
+class VerseChunk
+  attr_reader :number
+  def initialize(number)
+    @number = number
+  end
+
+  def container
+    "bottles"
+  end
+
+  def pronoun
+      "one"
+  end
+
+  def amount
+    number.to_s
+  end
+
+  def action
+      "Take #{pronoun} down and pass it around"
+  end
+
+  def successor
+    number-1
+  end
+
+  def to_s
+    "#{amount} #{container}"
+  end
+
+end
+
+class VerseChunkZero < VerseChunk
+  def amount
+      "no more"
+  end
+
+  def action
+      "Go to the store and buy some more"
+  end
+
+  def successor
+      99
+  end
+end
+
+class VerseChunkOne < VerseChunk
+  def container
+      "bottle"
+  end
+
+  def pronoun
+      "it"
+  end
+
+end
+
+class VerseChunkSix < VerseChunk
+  def container
+    "six-pack"
+  end
+
+  def amount
+    1.to_s
+  end
+
 end
