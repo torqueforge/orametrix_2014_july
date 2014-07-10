@@ -32,7 +32,7 @@ Old MacDonald had a farm, E-I-E-I-O.]
   end
 
   def test_pig_and_nothing_and_duck
-    skip
+    #skip
     expected =
     %q[Old MacDonald had a farm, E-I-E-I-O,
 And on that farm he had a pig, E-I-E-I-O,
