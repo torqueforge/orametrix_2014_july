@@ -6,9 +6,10 @@ _Old MacDonald Had a Farm_.
 ### Test Suite
 
 ```lib/farm.rb``` contains the code for _Old MacDonald Had a Farm_.
-A new requirement has been added and a failing test has been written.
+A new requirement has been added and a new test has been written.
+The new test is currently being skipped.
 
-Your job is to make the failing test pass.
+Your job is to make the skipped test pass.
 
 The test suite can be run with the following command:
 

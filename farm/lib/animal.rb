@@ -1,3 +1,6 @@
+# DO NOT CHANGE THIS CODE !!!
+# DO NOT CHANGE THIS CODE !!!
+# DO NOT CHANGE THIS CODE !!!
 # Assume Animals is part of an external framework that you cannot change.
 module Article
   refine String do
